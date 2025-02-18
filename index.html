@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইনফরমেশন ফরম</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        textarea {
+            height: 150px;
+            resize: none;
+            width: 100%;
+        }
+        .copy-button {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>ইনফরমেশন ফরম</h1>
+    <form id="infoForm">
+        <label for="location">লোকেশন:</label>
+        <input type="text" id="location" name="location" required>
+        
+        <label for="name">নাম:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="qualification">যোগ্যতা:</label>
+        <input type="text" id="qualification" name="qualification" required>
+        
+        <label for="phone1">ফোন নম্বর ১:</label>
+        <input type="text" id="phone1" name="phone1" required>
+        
+        <label for="phone2">ফোন নম্বর ২:</label>
+        <input type="text" id="phone2" name="phone2" required>
+        
+        <button type="submit">জমা দিন</button>
+    </form>
+
+    <h2>HTML কোড:</h2>
+    <div class="output">
+        <button class="copy-button" id="copyButton">কপি করুন</button>
+        <textarea id="htmlOutput" readonly></textarea>
+    </div>
+</div>
+
+<script>
+    document.getElementById('infoForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // ফরম জমা দেওয়া বন্ধ করুন
+        
+        // ইনপুট তথ্য সংগ্রহ করুন
+        const name = document.getElementById('name').value;
+        const location = document.getElementById('location').value;
+        const qualification = document.getElementById('qualification').value;
+        const phone1 = document.getElementById('phone1').value;
+        const phone2 = document.getElementById('phone2').value;
+
+        // HTML কোড তৈরি করুন
+        const htmlOutput = `
+            <div class="info-box" data-location="${location}">
+                <p>${name}</p>
+                <p>যোগ্যতা: ${qualification}</p>
+                <p>সিরিয়ালের জন্য <a href="tel:${phone1}" class="call-number">${phone1}</a>, <a href="tel:${phone2}" class="call-number">${phone2}</a></p>
