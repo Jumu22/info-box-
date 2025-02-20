@@ -89,11 +89,14 @@
         <label for="qualification">যোগ্যতা:</label>
         <input type="text" id="qualification" name="qualification" required>
         
+        <label for="patientLocation">রোগী দেখার স্থান:</label>
+        <input type="text" id="patientLocation" name="patientLocation" required>
+        
         <label for="phone1">ফোন নম্বর ১:</label>
-        <input type="text" id="phone1" name="phone1" required>
+        <input type="text" id="phone1" name="phone1" required pattern="\d{11}" title="দয়া করে 11 সংখ্যার ফোন নম্বর দিন">
         
         <label for="phone2">ফোন নম্বর ২:</label>
-        <input type="text" id="phone2" name="phone2" required>
+        <input type="text" id="phone2" name="phone2" pattern="\d{11}" title="দয়া করে 11 সংখ্যার ফোন নম্বর দিন (ঐচ্ছিক)">
         
         <button type="submit">জমা দিন</button>
     </form>
@@ -113,20 +116,31 @@
         const name = document.getElementById('name').value;
         const location = document.getElementById('location').value;
         const qualification = document.getElementById('qualification').value;
+        const patientLocation = document.getElementById('patientLocation').value;
         const phone1 = document.getElementById('phone1').value;
         const phone2 = document.getElementById('phone2').value;
 
         // HTML কোড তৈরি করুন
+        const phoneLinks = [];
+        phoneLinks.push(`<a href="tel:${phone1}" class="call-number">${phone1}</a>`);
+        if (phone2) {
+            phoneLinks.push(`<a href="tel:${phone2}" class="call-number">${phone2}</a>`);
+        }
+
         const htmlOutput = `
             <div class="info-box" data-location="${location}">
                 <p>${name}</p>
                 <p>যোগ্যতা: ${qualification}</p>
-                <p>সিরিয়ালের জন্য <a href="tel:${phone1}" class="call-number">${phone1}</a>, <a href="tel:${phone2}" class="call-number">${phone2}</a></p>
+                <p>রোগী দেখার স্থান: ${patientLocation}</p>
+                <p>সিরিয়ালের জন্য ${phoneLinks.join(', ')}</p>
             </div>
         `;
 
         // HTML কোড টেক্সট এরিয়াতে দেখান
         document.getElementById('htmlOutput').value = htmlOutput;
+
+        // ইনপুট ফিল্ডগুলো খালি করুন
+        document.getElementById('infoForm').reset();
     });
 
     // কপি করার ফাংশন
